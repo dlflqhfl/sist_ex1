@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<form action="homework" method="get" name="frm">
+
+    <select id="searchType" name="selection">
+        <option value="empno">사번</option>
+        <option value="ename">이름</option>
+        <option value="job">직종</option>
+    </select>
+
+<input type="text" id="text" name="text">
+<button type="button" onclick="search()">검색</button>
+</form>
+
+<script>
+    function search() {
+        document.forms[0].submit();
+        /*document.frm.submit();*/
+    }
+</script>
+</body>
+</html>

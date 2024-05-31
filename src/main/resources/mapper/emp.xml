@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="emp">
+    <select id="all" resultType="pm.vo.EmpVO">
+        select *
+        from emp
+    </select>
+    <select id="searchByEmpno" resultType="pm.vo.EmpVO" parameterType="String">
+        select *
+        from emp
+        where empno LIKE CONCAT("%", #{empno}, "%")
+    </select>
+    <select id="searchByEname" resultType="pm.vo.EmpVO" parameterType="String">
+        select *
+        from emp
+        where empname LIKE CONCAT("%", #{ename}, "%")
+    </select>
+    <select id="searchByJob" resultType="pm.vo.EmpVO" parameterType="String">
+        select *
+        from emp
+        where job LIKE CONCAT("%", #{job}, "%")
+    </select>
+
+    <select id="searchByMultipleFields" resultType="pm.vo.EmpVO" parameterType="map">
+        select *
+        from emp
+        <where>
+            <if test="empno != null">
+                AND empno LIKE CONCAT('%', #{empno}, '%')
+            </if>
+            <if test="ename != null">
+                AND ename LIKE CONCAT('%', #{ename}, '%')
+            </if>
+            <if test="job != null">
+                AND job LIKE CONCAT('%', #{job}, '%')
+            </if>
+        </where>
+    </select>
+</mapper>

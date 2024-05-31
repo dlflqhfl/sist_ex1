@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="wrap">
+    <header>
+        <h1>가입 폼</h1>
+    </header>
+    <article>
+        <form action="ex6Servlet" method="get">
+            <table>
+                <caption>가입폼의 테이블</caption>
+                <colgroup>
+                    <col width="70px">
+                    <col width="*">
+                </colgroup>
+                <tbody>
+                <tr>
+                    <td><label for="s_id">아이디:</label></td>
+                    <td><input type="text" id="s_id" name="u_id" data-msg="아이디"/></td>
+                </tr>
+                <tr>
+                    <td><label for="s_pw">비밀번호:</label></td>
+                    <td><input type="password" id="s_pw" name="u_pw" data-msg="비밀번호"/></td>
+                </tr>
+                <tr>
+                    <td><label for="s_name">이름:</label></td>
+                    <td><input type="text" id="s_name" name="u_name" data-msg="이름"/></td>
+                </tr>
+                <tr>
+                    <td><label for="s_email">이메일:</label></td>
+                    <td>
+                        <input type="text" id="s_email" name="u_email" data-msg="이메일"/>
+                        <label for="s_email2">@</label>
+                        <input type="text" id="s_email2" name="u_email" data-msg="아이디"/>
+                        <select id="sel_email" onchange="">
+                            <option>직접선택</option>
+                            <option value="gmail.com">구글</option>
+                            <option value="naver.com">네이버</option>
+                            <option value="daum.net">다음</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td><label for="u_hobby">취미:</label></td>
+                    <td>
+                        <input type="checkbox" id="u_hobby" name="m_hobby" value="독서"/><span>독서</span>
+                        &nbsp;&nbsp;
+                        <input type="checkbox" id="u_hobby2" name="m_hobby" value="음악감상"/><span>음악감상</span>
+                        &nbsp;&nbsp;
+                        <input type="checkbox" id="u_hobby3" name="m_hobby" value="클래식기타"/><span>클래식기타</span>
+                        &nbsp;&nbsp;
+                        <input type="checkbox" id="u_hobby4" name="m_hobby" value="영화감상"/><span>영화감상</span>
+                        &nbsp;&nbsp;
+                        <input type="checkbox" id="u_hobby5" name="m_hobby" value="배틀그라운드"/><span>배틀그라운드</span>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <input type="button" id="btn" value="보내기">
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </form>
+    </article>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script>
+        $("#btn").click(function (){
+            let ar = document.forms[0].elements;
+            //받은 하위요소들 중 아이디, 비밀번호, 이름 만 유효성 검사
+            //마지막에 들어오는 애가 버튼이라 -1을 해준다
+            for(let i = 0; i < ar.length -1 ; i++){
+                if(i >= 3){
+                    break;
+                }
+                if(ar[i].value.trim().length < 1){
+                    alert(ar[i].dataset.msg+"을 입력하세요");
+                    ar[i].value = "";
+                    ar[i].focus();
+                    return;
+                }
+            }//for문의 끝
+
+            document.forms[0].submit();
+        })
+        $("#sel_email").change(function() {
+            let selectedOption = $(this).val();
+            let thisText = $("#sel_email option:selected").text();
+
+            if (selectedOption !== "직접선택") {
+                $("#s_email2").val(selectedOption);
+            }else {
+                $("#s_email2").val("");
+            }
+        });
+    </script>
+</div>
+</body>
+</html>
